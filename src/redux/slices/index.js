@@ -1,4 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+import { apiKey, api } from "../../api";
+
+const { path, option, parametes } = api.getNewRecipes;
 
 const recipeSlice = createSlice({
   name: "recipe",
@@ -6,8 +10,13 @@ const recipeSlice = createSlice({
     recipeList: [],
   },
   reducers: {
-    getRecipeList: (state) => {
-      state = [];
+    getRecipeList: async (state) => {
+      try {
+        const res = await axios(path + parametes, option);
+        state.recipeList = res.data.recipes;
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 });

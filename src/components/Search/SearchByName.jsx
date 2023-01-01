@@ -1,9 +1,29 @@
-import React from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 
 function SearchByName() {
+  const [searchInfo, setSearchInfo] = useState({
+    name: "pizza",
+    number: "2",
+  });
+
+  const [resultSearch, setResultSearch] = useState([]);
+
+  const apiKey = "2111d2ffc8e049adb118bd772a5ca9a4";
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.spoonacular.com/recipes/complexSearch?query=${searchInfo.name}&number=${searchInfo.number}&apiKey=${apiKey}`
+      )
+      .then((res) => console.log(res.data.results))
+      .catch((error) => console.log(error));
+  }, [searchInfo]);
+
   return (
     <div className="opacity-75 p-4 bg-white rounded  w-25">
       <h3 className="mb-5">Search By Recipe Name</h3>
+
       <form>
         <div class="mb-3 ">
           <input
