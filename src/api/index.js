@@ -4,7 +4,7 @@ const api = {
     path: "https://api.spoonacular.com/recipes/random?number=5",
     parameters: {
       number: "",
-      apiKey: `&apikey=${apiKey}`,
+      apiKey: `&apiKey=${apiKey}`,
     },
     options: {
       method: "GET",
