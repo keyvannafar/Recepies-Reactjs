@@ -1,15 +1,24 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { searchByNameApi } from "../../api/Recipes";
 
 function SearchByName() {
   const [searchInfo, setSearchInfo] = useState({
-    name: "pizza",
-    number: "2",
+    name: "",
+    number: "",
   });
 
-  const [resultSearch, setResultSearch] = useState([]);
+  const dispatch = useDispatch();
 
-  useEffect(() => {}, [searchInfo]);
+  const searchBynameForm = (e) => {
+    e.preventDefault();
+    const search = {
+      name: "pizza",
+      number: "2",
+    };
+    dispatch(searchByNameApi(search));
+  };
 
   return (
     <div className="opacity-75 p-4 bg-white rounded  w-25">
@@ -38,7 +47,11 @@ function SearchByName() {
           </select>
         </div>
         <div className="mb-3">
-          <button type="submit" className="btn btn-warning">
+          <button
+            type="submit"
+            className="btn btn-warning"
+            onClick={searchBynameForm}
+          >
             Search
           </button>
         </div>

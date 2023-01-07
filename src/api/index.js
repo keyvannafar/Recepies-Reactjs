@@ -14,7 +14,20 @@ const api = {
     },
     method: "GET",
   },
-  getRecipesByName: "https://api.spoonacular.com/recipes/complexSearch?",
+  getRecipesByName: {
+    path: "https://api.spoonacular.com/recipes/complexSearch?",
+    parameters: {
+      number: "",
+      apiKey: `&apiKey=${apiKey}`,
+    },
+    options: {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    },
+    method: "GET",
+  },
 };
 
 export { apiKey, api };

@@ -1,8 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { api } from "../../api";
 
-const { path, option, parameters } = api.getNewRecipes;
 
 const recipeSlice = createSlice({
   name: "recipe",
@@ -11,16 +8,11 @@ const recipeSlice = createSlice({
     test: "",
   },
   reducers: {
-    getNewRecipes: (state) => {
-      // try {
-      //   const res = await axios(path + parameters.apiKey, option);
-      //   state.recipeList = res.data.recipes;
-      // } catch (error) {
-      //   console.log(error);
-      // }
-      axios(path + parameters.apiKey, option)
-        .then((res) => (state.recipeList = res.data.recipes))
-        .catch((err) => console.error(err));
+    getNewRecipes: (state, actions) => {
+      state.recipeList = actions.payload;
+    },
+    searchByName: (state, actions) => {
+      state.recipeList = actions.payload;
     },
 
     test_: (state) => {
@@ -29,5 +21,7 @@ const recipeSlice = createSlice({
     },
   },
 });
-export const { getNewRecipes, test_ } = recipeSlice.actions;
+export const { getNewRecipes, searchByName } = recipeSlice.actions;
 export default recipeSlice.reducer;
+
+
